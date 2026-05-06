@@ -1,0 +1,5 @@
+order_id,retailer,status,carrier,tracking_number,estimated_delivery,item_summary,first_seen_at,last_updated_at,last_notified_status
+C00428193847,Nike,ordered,,,2026-05-14,Nike Air Force 1 '07 White/White Size 10.5 Qty: 1,2026-05-06T19:58:44+00:00,2026-05-06T19:58:44+00:00,
+1029384756,StockX,out_for_delivery,UPS,1Z999AA10123456784,2024-05-12,Jordan 4 Retro Bred Reimagined (Size 10.5),2026-05-06T19:58:46+00:00,2026-05-06T19:58:47+00:00,out_for_delivery
+112-7384920-1029384,Amazon,delivered,,,2026-05-06,Sony WH-1000XM5 Wireless Headphones,2026-05-06T19:58:52+00:00,2026-05-06T19:58:52+00:00,delivered
+GT-58392048,Goat,exception,FedEx,774839201847,2026-05-07,,2026-05-06T19:58:53+00:00,2026-05-06T19:58:53+00:00,exception
