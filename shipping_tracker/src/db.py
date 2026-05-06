@@ -18,11 +18,11 @@ def init_db(path: str) -> Connection:
     raise NotImplementedError
 
 
-def upsert_order(conn: Connection, parsed: dict, email_hash: str) -> Transition | None:
+def upsert_order(conn: Connection, parsed: dict, email_hash: str) -> Optional[Transition]:
     """Insert or update an order from parsed email data."""
     raise NotImplementedError
 
 
-def mark_notified(conn: Connection, order_id: str, retailer: str | None, status: str) -> None:
+def mark_notified(conn: Connection, order_id: str, retailer: Optional[str], status: str) -> None:
     """Record that an SMS was successfully sent for an order status."""
     raise NotImplementedError
