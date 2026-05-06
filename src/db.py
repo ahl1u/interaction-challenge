@@ -54,7 +54,7 @@ def init_db(path: str) -> Connection:
 
 def upsert_order(conn: Connection, parsed: dict, email_hash: str) -> Optional[Transition]:
     """Insert or update an order from parsed email data."""
-    if parsed.get("status") == "unknown" or not parsed.get("order_id"):
+    if parsed.get("status") == "unknown":
         return None
 
     #check if duplicate email processing
@@ -65,12 +65,29 @@ def upsert_order(conn: Connection, parsed: dict, email_hash: str) -> Optional[Tr
         return None
 
     now = datetime.now(timezone.utc).isoformat(timespec="seconds")
-    order_id = parsed["order_id"]
+    order_id = parsed.get("order_id")
     retailer = parsed.get("retailer")
     status = parsed["status"]
 
     with conn:
-        #check if order exists in db
+        #check if order exists in db by tracking num (for case of carrier email)
+        if not order_id and parsed.get("tracking_number"):
+            tracking_order = conn.execute(
+                """
+                SELECT order_id, retailer
+                FROM orders
+                WHERE tracking_number = ?
+                """,
+                (parsed["tracking_number"],),
+            ).fetchone()
+            if tracking_order is not None:
+                order_id = tracking_order["order_id"]
+                retailer = tracking_order["retailer"]
+
+        if not order_id:
+            return None
+
+        #match by order id + retailer instead
         existing_order = conn.execute(
             "SELECT status, last_notified_status FROM orders WHERE order_id = ? AND retailer IS ?",
             (order_id, retailer),
