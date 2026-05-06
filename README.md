@@ -2,7 +2,10 @@
 
 A Python pipeline that parses HTML shipping emails, tracks order state in SQLite, and sends SMS notifications on actionable status changes.
 
-Built this because I used to track 20+ sneaker orders simultaneously and wanted something that would just text me when something actually happened.
+Built this because I used to track 20+ sneaker orders simultaneously and wanted something that would just text me when something actually happened. 
+
+Shipping emails are generally inconsistent, noisy and hard to keep track of. In this case, the useful user-facing behavior is simple: know when an order ships, goes out for delivery, gets delivered, or hits a delivery problem.
+
 
 ## Architecture
 
