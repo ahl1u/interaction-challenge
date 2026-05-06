@@ -1,5 +1,6 @@
 from dataclasses import dataclass
 from sqlite3 import Connection
+from typing import Optional
 
 
 @dataclass
@@ -7,9 +8,9 @@ class Transition:
     """Represents an order status transition after processing an email."""
 
     is_new_order: bool
-    prev_status: str | None
+    prev_status: Optional[str]
     new_status: str
-    last_notified_status: str | None
+    last_notified_status: Optional[str]
 
 
 def init_db(path: str) -> Connection:
